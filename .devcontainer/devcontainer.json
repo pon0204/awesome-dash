@@ -18,7 +18,8 @@
 			"database": "postgres",
 			"username": "postgres",
 			"password": "postgres"
-		}]
+		}],
+		"remote.containers.dotfiles.repository": "https://github.com/pon0204/test-dotfiles.git"
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
