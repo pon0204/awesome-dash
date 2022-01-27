@@ -1,6 +1,12 @@
 import {
   Box,
+  Button,
   Flex,
+  FormControl,
+  FormLabel,
+  Input,
+  Link,
+  Spinner,
   Stack,
   Text,
   useColorMode,
@@ -24,6 +30,7 @@ export const AuthForm = () => {
         e.preventDefault()
         setLoading(true)
         try {
+          console.log(email, password)
           const { data, err } = await fetcher(
             `/api/${authButtonState ? 'login' : 'signup'}`,
             { email, password }
@@ -80,7 +87,45 @@ export const AuthForm = () => {
             boxShadow={'lg'}
             p={8}
           >
-            <Stack spacing={4}></Stack>
+            <Stack spacing={4}>
+              <FormControl id="email">
+                <FormLabel>Email Addres</FormLabel>
+                <Input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </FormControl>
+              <FormControl id="email">
+                <FormLabel>Password</FormLabel>
+                <Input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </FormControl>
+              <Stack spacing={10}>
+                <Button
+                  type="submit"
+                  bg={'blue.400'}
+                  color={'white'}
+                  _hover={{ bg: 'blue.500' }}
+                >
+                  {authButtonState ? 'Login' : 'Signup'}
+                  {loading && <Spinner ml={5} />}
+                </Button>
+              </Stack>
+              <Stack>
+                <Text align={'center'}>
+                  <Link
+                    onClick={() => setAuthButtonState(!authButtonState)}
+                    color={'blue.400'}
+                  >
+                    {authButtonState ? 'New? sign up' : 'Already a User? Login'}
+                  </Link>
+                </Text>
+              </Stack>
+            </Stack>
           </Box>
         </Stack>
       </Flex>
